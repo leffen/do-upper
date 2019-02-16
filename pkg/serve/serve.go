@@ -3,9 +3,11 @@ package serve
 import (
 	"context"
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httptrace"
+	"os"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -32,9 +34,34 @@ func (p *pingResponse) clearTimers() {
 	p.connectTime = 0
 }
 
+func (p *pingResponse) toJSON() (string, error) {
+	resp := struct {
+		PingNum       int    `json:"ping_num"`
+		URL           string `json:"url"`
+		Duration      int64  `json:"duration_ns"`
+		TotalDuration int64  `json:"total_dutation_ns"`
+		DNSDuration   int64  `json:"dns_duration_ns"`
+		TLSDuration   int64  `json:"tls_duartion_ns"`
+		ConnectTime   int64  `json:"connect_time_ns"`
+	}{
+		p.pingNum, p.url, p.dur.Nanoseconds(), p.totalDur.Nanoseconds(), p.dnsDuration.Nanoseconds(), p.tlsDuration.Nanoseconds(), p.connectTime.Nanoseconds(),
+	}
+
+	b, err := json.Marshal(resp)
+	return string(b), err
+}
+
 // Run a trace server
 func (s *Server) Run(ctx context.Context, targets []string, sleepTimeSeconds int) error {
 	logrus.Info("Running serve")
+
+	fileName := "timings.json"
+	f, err := os.OpenFile(fileName, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0660)
+	if err != nil {
+		logrus.Fatalf("Unable to open timins file with error :%s", err)
+	}
+	defer f.Close()
+
 	ch := make(chan pingResponse)
 	for _, target := range targets {
 		go func(url string) {
@@ -50,16 +77,30 @@ func (s *Server) Run(ctx context.Context, targets []string, sleepTimeSeconds int
 			logrus.Infoln("Quiting RUN due to context done")
 			return ctx.Err()
 		case resp := <-ch:
+			data, err := resp.toJSON()
+			if err != nil {
+				logrus.Errorf("Unable to marshal to json with error %s", err)
+				continue
+			}
 			fmt.Printf("RESP :%#v\n", resp)
+
+			_, err = f.Write([]byte(data))
+			if err != nil {
+				logrus.Errorf("Unable to marshal to json with error %s", err)
+				continue
+			}
+			f.Write([]byte("\n"))
+
 		}
 	}
 
 }
 
 func (s *Server) timeSite(ctx context.Context, url string, sleepTime int, ch chan pingResponse) error {
-	pr := pingResponse{}
+	pr := pingResponse{url: url}
 
 	for {
+		logrus.Debugf("Pinging site %s", url)
 		pr.clearTimers()
 		req, _ := http.NewRequest("GET", url, nil)
 
@@ -101,13 +142,11 @@ func (s *Server) timeSite(ctx context.Context, url string, sleepTime int, ch cha
 		ch <- pr
 		fmt.Printf("Total time: %v\n", pr.totalDur)
 
-		for {
-			select {
-			case <-ctx.Done():
-				return ctx.Err()
-			case <-time.After(time.Second * time.Duration(sleepTime)):
-				break
-			}
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-time.After(time.Second * time.Duration(sleepTime)):
+			logrus.Debug("Next check")
 		}
 
 	}

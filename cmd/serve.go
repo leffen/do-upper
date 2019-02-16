@@ -16,8 +16,10 @@ package cmd
 
 import (
 	"context"
+	"os"
 
 	"github.com/leffen/do-upper/pkg/serve"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -28,8 +30,12 @@ var serveCmd = &cobra.Command{
 	Long:  `Checks if a give set of sites is up and timing the response`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := context.Background()
+		// Running with debug info enabled
+		logrus.SetLevel(logrus.DebugLevel)
+		logrus.SetOutput(os.Stdout)
+
 		s := serve.Server{}
-		s.Run(ctx, []string{"https://leffen.com"}, 10)
+		s.Run(ctx, []string{"https://leffen.com"}, 30)
 	},
 }
 
