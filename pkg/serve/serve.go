@@ -37,6 +37,7 @@ func (p *pingResponse) clearTimers() {
 func (p *pingResponse) toJSON() (string, error) {
 	resp := struct {
 		PingNum       int    `json:"ping_num"`
+		Time          string `json:"time"`
 		URL           string `json:"url"`
 		Duration      int64  `json:"duration_ns"`
 		TotalDuration int64  `json:"total_dutation_ns"`
@@ -44,7 +45,7 @@ func (p *pingResponse) toJSON() (string, error) {
 		TLSDuration   int64  `json:"tls_duartion_ns"`
 		ConnectTime   int64  `json:"connect_time_ns"`
 	}{
-		p.pingNum, p.url, p.dur.Nanoseconds(), p.totalDur.Nanoseconds(), p.dnsDuration.Nanoseconds(), p.tlsDuration.Nanoseconds(), p.connectTime.Nanoseconds(),
+		p.pingNum, time.Now().Format(time.RFC3339), p.url, p.dur.Nanoseconds(), p.totalDur.Nanoseconds(), p.dnsDuration.Nanoseconds(), p.tlsDuration.Nanoseconds(), p.connectTime.Nanoseconds(),
 	}
 
 	b, err := json.Marshal(resp)

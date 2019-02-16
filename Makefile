@@ -50,7 +50,7 @@ run-status:
 
 test: vet
 	@# this target should always be listed first so "make" runs the tests.
-	REDIS=$(REDIS_URL) go test -cover -race -v ./...
+	go test -cover -race -v ./...
 
 vet: 
 	@# We can't vet the vendor directory, it fails.
