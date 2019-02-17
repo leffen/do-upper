@@ -28,7 +28,7 @@ func (s *Server) Run(ctx context.Context, targets []string, sleepTimeSeconds int
 		}(target)
 	}
 
-	fa := newPingResponseFileAppender("timings.json")
+	fa := newPingResponseFileAppender("data/timings.json")
 
 	return s.responseCollector(ctx, ch, fa)
 }
