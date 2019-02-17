@@ -15,8 +15,8 @@ type Server struct {
 }
 
 // Run a trace server
-func (s *Server) Run(ctx context.Context, targets []string, sleepTimeSeconds int) error {
-	logrus.Info("Running serve")
+func (s *Server) Run(ctx context.Context, targets []string, sleepTimeSeconds int64) error {
+	logrus.Infof("Running serve. Targets : %#v timeBetween: %d", targets, sleepTimeSeconds)
 
 	ch := make(chan pingResponse)
 	for _, target := range targets {
@@ -53,7 +53,7 @@ func (s *Server) responseCollector(ctx context.Context, ch chan pingResponse, no
 	}
 }
 
-func (s *Server) timeSite(ctx context.Context, url string, sleepTime int, ch chan pingResponse) error {
+func (s *Server) timeSite(ctx context.Context, url string, sleepTime int64, ch chan pingResponse) error {
 	pr := pingResponse{url: url}
 
 	for {

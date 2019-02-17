@@ -17,10 +17,17 @@ package cmd
 import (
 	"context"
 	"os"
+	"strings"
 
 	"github.com/leffen/do-upper/pkg/serve"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+)
+
+var (
+	logFile            string
+	servers            string
+	timeBetweenSeconds int64
 )
 
 // serveCmd represents the serve command
@@ -34,12 +41,16 @@ var serveCmd = &cobra.Command{
 		logrus.SetLevel(logrus.DebugLevel)
 		logrus.SetOutput(os.Stdout)
 
+		urls := strings.Split(servers, ",")
 		s := serve.Server{}
-		s.Run(ctx, []string{"https://leffen.com"}, 30)
+		s.Run(ctx, urls, timeBetweenSeconds)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
 
+	serveCmd.Flags().StringVarP(&servers, "servers", "s", "", "Urls to check")
+	serveCmd.Flags().StringVarP(&logFile, "logfile", "l", "timings.json", "timing log file ( json data) ")
+	serveCmd.Flags().Int64VarP(&timeBetweenSeconds, "time-between", "t", 60, "Time beween pings ")
 }

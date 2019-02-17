@@ -43,7 +43,7 @@ build: test
 	go build -ldflags  "-s -X main.CommitHash=$(VERSION) -X main.BuildTime=$(BuildTime) -w"  -o bin/$(APP) .
 
 run: 
-		go run  $(SOURCES) serve
+		go run  $(SOURCES) serve -s "https://leffen.com" -l "data/timings.json" -t 15
 	
 run-status: 
 		go run  $(SOURCES) status 
