@@ -35,12 +35,13 @@ func (p *pingResponseFileAppender) OnNewMeasurement(resp pingResponse) error {
 		return fmt.Errorf("Unable to marshal to json with error %s", err)
 	}
 
-	logrus.Debugf("RESP :%#v\n", resp)
-
 	_, err = p.f.Write([]byte(data))
 	if err != nil {
 		return fmt.Errorf("Unable to marshal to json with error %s", err)
 	}
 	p.f.Write([]byte("\n"))
+
+	logrus.Info(resp.asString())
+
 	return nil
 }

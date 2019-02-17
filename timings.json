@@ -1103,3 +1103,12 @@
 {"ping_num":1103,"url":"https://leffen.com","duration_ns":148733464,"total_dutation_ns":148859035,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
 {"ping_num":1,"time":"2019-02-17T11:19:05+01:00","url":"https://leffen.com","duration_ns":401515741,"total_dutation_ns":401549568,"dns_duration_ns":97531935,"tls_duartion_ns":95419245,"connect_time_ns":28974787}
 {"ping_num":2,"time":"2019-02-17T11:19:35+01:00","url":"https://leffen.com","duration_ns":141546381,"total_dutation_ns":141606549,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":1,"time":"2019-02-17T11:25:04+01:00","url":"https://leffen.com","duration_ns":276188588,"total_dutation_ns":276234451,"dns_duration_ns":388332,"tls_duartion_ns":91601409,"connect_time_ns":28816444}
+{"ping_num":1,"time":"2019-02-17T11:28:34+01:00","url":"https://leffen.com","duration_ns":280923912,"total_dutation_ns":280989004,"dns_duration_ns":355572,"tls_duartion_ns":88424538,"connect_time_ns":28997096}
+{"ping_num":2,"time":"2019-02-17T11:29:04+01:00","url":"https://leffen.com","duration_ns":143413222,"total_dutation_ns":143503510,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":3,"time":"2019-02-17T11:29:34+01:00","url":"https://leffen.com","duration_ns":137494838,"total_dutation_ns":137563713,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":4,"time":"2019-02-17T11:30:04+01:00","url":"https://leffen.com","duration_ns":210846528,"total_dutation_ns":210927230,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":5,"time":"2019-02-17T11:30:34+01:00","url":"https://leffen.com","duration_ns":143930856,"total_dutation_ns":144030289,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":6,"time":"2019-02-17T11:31:05+01:00","url":"https://leffen.com","duration_ns":145805233,"total_dutation_ns":145886592,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":1,"time":"2019-02-17T11:31:41+01:00","url":"https://leffen.com","duration_ns":269047554,"total_dutation_ns":269102195,"dns_duration_ns":409216,"tls_duartion_ns":91707763,"connect_time_ns":29044708}
+{"ping_num":1,"time":"2019-02-17T11:32:16+01:00","url":"https://leffen.com","duration_ns":319947370,"total_dutation_ns":320013577,"dns_duration_ns":382798,"tls_duartion_ns":96155427,"connect_time_ns":29806116}
