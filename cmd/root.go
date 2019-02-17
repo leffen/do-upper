@@ -1,4 +1,4 @@
-// Copyright © 2019 NAME HERE leffen@gmail.com
+// Copyright © 2019 ProgramArkitekten AS leffen@gmail.com
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

@@ -1,5 +1,7 @@
 Worker to check if a web site is up
 
+To run it standalone:
+go run main.go 
 
 Components:
 Docker
