@@ -23,7 +23,7 @@ DOCKER_REPO = leffen
 DOCKER_NAME = do-upper
 DOCKER_IMAGE = $(DOCKER_REPO)/$(DOCKER_NAME)
 
-DOCKER_TAG = v0.1.0
+DOCKER_TAG = v0.1.1
  
 compiled: 
 	$(GOBUILDFLAGS) go build -ldflags "-s -X main.CommitHash=$(GitCommit) -X main.BuildTime=$(BuildTime)"  -a -installsuffix cgo -o bin/alpine/$(APP) .
@@ -31,7 +31,7 @@ compiled:
 buildd: test compiled 
 	docker build  -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
 
-pushd:
+pushd: buildd
 	docker push $(DOCKER_IMAGE):$(DOCKER_TAG)
 
 released: test bump buildd pushd

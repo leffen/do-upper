@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/leffen/cruncy"
 	"github.com/sirupsen/logrus"
 )
 
@@ -17,6 +18,7 @@ func newPingResponseFileAppender(fileName string) *pingResponseFileAppender {
 }
 
 func (p *pingResponseFileAppender) OnStart() error {
+	cruncy.EnsureFileSave(p.fileName)
 	f, err := os.OpenFile(p.fileName, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0660)
 	if err != nil {
 		return fmt.Errorf("Unable to open %s  with error :%s", p.fileName, err)

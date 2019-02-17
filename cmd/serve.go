@@ -43,7 +43,10 @@ var serveCmd = &cobra.Command{
 
 		urls := strings.Split(servers, ",")
 		s := serve.Server{}
-		s.Run(ctx, urls, timeBetweenSeconds)
+		err := s.Run(ctx, urls, timeBetweenSeconds)
+		if err != nil {
+			logrus.Fatalf("Unable to serve with error: %s", err)
+		}
 	},
 }
 
