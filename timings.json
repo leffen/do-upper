@@ -1101,3 +1101,5 @@
 {"ping_num":1101,"url":"https://leffen.com","duration_ns":195039314,"total_dutation_ns":195130291,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
 {"ping_num":1102,"url":"https://leffen.com","duration_ns":153347365,"total_dutation_ns":153433224,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
 {"ping_num":1103,"url":"https://leffen.com","duration_ns":148733464,"total_dutation_ns":148859035,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}
+{"ping_num":1,"time":"2019-02-17T11:19:05+01:00","url":"https://leffen.com","duration_ns":401515741,"total_dutation_ns":401549568,"dns_duration_ns":97531935,"tls_duartion_ns":95419245,"connect_time_ns":28974787}
+{"ping_num":2,"time":"2019-02-17T11:19:35+01:00","url":"https://leffen.com","duration_ns":141546381,"total_dutation_ns":141606549,"dns_duration_ns":0,"tls_duartion_ns":0,"connect_time_ns":0}

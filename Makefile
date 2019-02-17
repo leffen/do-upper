@@ -42,7 +42,7 @@ bump:
 build: test
 	go build -ldflags  "-s -X main.CommitHash=$(VERSION) -X main.BuildTime=$(BuildTime) -w"  -o bin/$(APP) .
 
-run-serve: 
+run: 
 		go run  $(SOURCES) serve
 	
 run-status: 
