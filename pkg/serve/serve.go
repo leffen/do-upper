@@ -60,7 +60,7 @@ func (s *Server) timeSite(ctx context.Context, url string, sleepTime int64, ch c
 		pr.clearTimers()
 
 		pr.pingNum++
-		logrus.Debugf("%06d %-30.30s Start PING", pr.pingNum, url)
+		//logrus.Debugf("%06d %-30.30s Start PING", pr.pingNum, url)
 		req, _ := http.NewRequest("GET", url, nil)
 
 		var start, connect, dns, tlsHandshake time.Time
@@ -90,6 +90,8 @@ func (s *Server) timeSite(ctx context.Context, url string, sleepTime int64, ch c
 		req = req.WithContext(httptrace.WithClientTrace(req.Context(), trace))
 		start = time.Now()
 		if _, err := http.DefaultTransport.RoundTrip(req); err != nil {
+			// Not to self. Check if all watchers quite then server must shutdown
+			logrus.Errorf("Unable to ping %s with error : %s", url, err)
 			return err
 		}
 		pr.totalDur = time.Since(start)
